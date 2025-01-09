@@ -1,22 +1,15 @@
-package com.example.movieapp.activity
+package com.test.moviebrowser.activity
 
-import android.app.Activity
-import android.app.ActivityOptions
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.movieapp.R
-import com.example.movieapp.model.Results
-import com.example.movieapp.utils.ProjectUtils
-import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.test.moviebrowser.R
+import com.test.moviebrowser.model.Results
+import com.test.moviebrowser.utils.ProjectUtils
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -34,7 +27,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
         bindView()
 
-        movie=intent.getParcelableExtra("movie")
+        movie= intent.getParcelableExtra("movie")!!
 
         Glide.with(this)
             .applyDefaultRequestOptions(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))

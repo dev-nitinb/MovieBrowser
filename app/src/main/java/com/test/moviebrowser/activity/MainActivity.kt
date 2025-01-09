@@ -1,14 +1,13 @@
-package com.example.movieapp.activity
+package com.test.moviebrowser.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
-import com.example.movieapp.R
-import com.example.movieapp.utils.ConnectionDetector
-import com.example.movieapp.utils.ProjectUtils
-import com.google.android.material.snackbar.Snackbar
+import com.test.moviebrowser.R
+import com.test.moviebrowser.utils.ConnectionDetector
+import com.test.moviebrowser.utils.ProjectUtils
 
 class MainActivity : AppCompatActivity() {
 

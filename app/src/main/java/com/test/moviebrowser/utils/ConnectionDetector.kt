@@ -1,4 +1,4 @@
-package com.example.movieapp.utils
+package com.test.moviebrowser.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

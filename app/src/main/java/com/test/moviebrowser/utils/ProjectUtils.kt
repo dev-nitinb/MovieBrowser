@@ -1,15 +1,14 @@
-package com.example.movieapp.utils
+package com.test.moviebrowser.utils
 
 import android.content.Context
-import android.net.ConnectivityManager
 import android.view.View
-import com.example.movieapp.R
+import com.test.moviebrowser.R
 import com.google.android.material.snackbar.Snackbar
 
 object ProjectUtils {
 
     //base url
-    val BASE_URL="https://api.themoviedb.org/3"
+    val BASE_URL="https://api.themoviedb.org/3/"
     val IMAGE_URL="https://image.tmdb.org/t/p/w185_and_h278_bestv2/"
 
     //post url
