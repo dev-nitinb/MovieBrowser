@@ -19,7 +19,7 @@ class MovieDetailActivity : AppCompatActivity() {
     lateinit var tvRating: AppCompatTextView
     lateinit var tvReleaseDate: AppCompatTextView
 
-    lateinit var movie:Results
+    lateinit var movie: Results
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
         bindView()
 
-        movie= intent.getParcelableExtra("movie")!!
+        movie = (intent.getSerializableExtra("movie") as Results?)!!
 
         Glide.with(this)
             .applyDefaultRequestOptions(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
@@ -37,18 +37,18 @@ class MovieDetailActivity : AppCompatActivity() {
             .placeholder(R.drawable.ic_image_not_found)
             .into(ivPoster)
 
-        tvMovieName.text=movie.original_title
-        tvOverview.text=movie.overview
-        tvRating.text=movie.vote_average.toString()
-        tvReleaseDate.text=movie.release_date
+        tvMovieName.text = movie.original_title
+        tvOverview.text = movie.overview
+        tvRating.text = movie.vote_average.toString()
+        tvReleaseDate.text = movie.release_date
 
     }
 
-    fun bindView(){
-        ivPoster=findViewById(R.id.ivPoster)
-        tvMovieName=findViewById(R.id.tvMovieName)
-        tvOverview=findViewById(R.id.tvOverview)
-        tvRating=findViewById(R.id.tvRating)
-        tvReleaseDate=findViewById(R.id.tvReleaseDate)
+    fun bindView() {
+        ivPoster = findViewById(R.id.ivPoster)
+        tvMovieName = findViewById(R.id.tvMovieName)
+        tvOverview = findViewById(R.id.tvOverview)
+        tvRating = findViewById(R.id.tvRating)
+        tvReleaseDate = findViewById(R.id.tvReleaseDate)
     }
 }

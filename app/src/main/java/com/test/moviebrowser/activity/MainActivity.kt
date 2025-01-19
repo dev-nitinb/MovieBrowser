@@ -2,45 +2,48 @@ package com.test.moviebrowser.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.lifecycle.lifecycleScope
 import com.test.moviebrowser.R
 import com.test.moviebrowser.utils.ConnectionDetector
 import com.test.moviebrowser.utils.ProjectUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var llSnackBar:LinearLayoutCompat
+    private lateinit var llSnackBar: LinearLayoutCompat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         bindView()
-
-        object : CountDownTimer(3000, 1000) {
-            override fun onFinish() {
+        lifecycleScope.launch {
+            delay(500)
+            withContext(Dispatchers.Main){
                 checkInternetConnectionAndProceed()
             }
+        }
+    }
 
-            override fun onTick(millisUntilFinished: Long) {
+    private fun bindView() {
+        llSnackBar = findViewById(R.id.llSnackBar)
+    }
 
+    private fun checkInternetConnectionAndProceed() {
+            if (ConnectionDetector.isConnected(this@MainActivity)) {
+                startActivity(Intent(this@MainActivity, HomePageActivity::class.java))
+                finish()
+            } else {
+                ProjectUtils.showSickbar(
+                    this@MainActivity,
+                    llSnackBar,
+                    "Internet connection not found!"
+                )
             }
-        }.start()
-    }
 
-
-    private fun bindView(){
-        llSnackBar=findViewById(R.id.llSnackBar)
-    }
-
-    private fun checkInternetConnectionAndProceed(){
-        if (ConnectionDetector.isConnected(this@MainActivity)){
-            startActivity(Intent(this@MainActivity, HomePageActivity::class.java))
-            finish()
-        }
-        else{
-            ProjectUtils.showSickbar(this@MainActivity,llSnackBar,"Internet connection not found!")
-        }
     }
 }

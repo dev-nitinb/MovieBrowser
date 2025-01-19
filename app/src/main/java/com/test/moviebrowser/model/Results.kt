@@ -1,10 +1,7 @@
 package com.test.moviebrowser.model
 
-import android.annotation.SuppressLint
-import android.os.Parcel
-import android.os.Parcelable
+import java.io.Serializable
 
-@SuppressLint("ParcelCreator")
 data class Results(
     val adult: Boolean,
     val backdrop_path: String,
@@ -20,11 +17,4 @@ data class Results(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int
-) : Parcelable {
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-    }
-}
+) : Serializable

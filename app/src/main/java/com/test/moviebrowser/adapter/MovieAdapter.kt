@@ -14,11 +14,11 @@ import com.test.moviebrowser.R
 import com.test.moviebrowser.activity.MovieDetailActivity
 import com.test.moviebrowser.model.Results
 
-class MovieAdapter(val mContext: Context, val alMovieResults:ArrayList<Results>):
+class MovieAdapter(val mContext: Context, val alMovieResults: ArrayList<Results>) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-    var view=LayoutInflater.from(mContext).inflate(R.layout.item_movie,parent,false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.item_movie, parent, false)
         return MovieViewHolder(view)
     }
 
@@ -30,22 +30,22 @@ class MovieAdapter(val mContext: Context, val alMovieResults:ArrayList<Results>)
         holder.bindData(alMovieResults[position])
     }
 
-    inner class MovieViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var ivPoster=itemView.findViewById<AppCompatImageView>(R.id.ivPoster)
-        var tvMovieName=itemView.findViewById<AppCompatTextView>(R.id.tvMovieName)
-        var cardView=itemView.findViewById<CardView>(R.id.cardView)
-        fun bindData(movieResult: Results){
+    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var ivPoster = itemView.findViewById<AppCompatImageView>(R.id.ivPoster)
+        var tvMovieName = itemView.findViewById<AppCompatTextView>(R.id.tvMovieName)
+        var cardView = itemView.findViewById<CardView>(R.id.cardView)
+        fun bindData(movieResult: Results) {
             Glide
                 .with(mContext)
                 .load("https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movieResult.poster_path}")
                 .placeholder(R.drawable.ic_image_not_found)
                 .into(ivPoster)
 
-            tvMovieName.text=movieResult.original_title
+            tvMovieName.text = movieResult.original_title
 
 
             cardView.setOnClickListener {
-                var intent=Intent(mContext, MovieDetailActivity::class.java)
+                val intent = Intent(mContext, MovieDetailActivity::class.java)
                 intent.putExtra("movie", movieResult)
                 mContext.startActivity(intent)
 
