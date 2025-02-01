@@ -1,12 +1,13 @@
-package com.test.moviebrowser.utils
+package com.test.moviebrowser.data.network
 
+import com.test.moviebrowser.utils.ProjectUtils
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private val BASE_URL = ProjectUtils.BASE_URL
+    private const val BASE_URL = ProjectUtils.BASE_URL
 
     private val client = OkHttpClient.Builder()
         .build()
@@ -19,5 +20,5 @@ object RetrofitClient {
             .build()
     }
 
-    val apiService: ApiService = retrofit.create(ApiService::class.java)
+    fun getApiService(): ApiService = retrofit.create(ApiService::class.java)
 }

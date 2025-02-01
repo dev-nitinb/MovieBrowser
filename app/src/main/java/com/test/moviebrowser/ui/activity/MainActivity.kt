@@ -1,4 +1,4 @@
-package com.test.moviebrowser.activity
+package com.test.moviebrowser.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, HomePageActivity::class.java))
                 finish()
             } else {
-                ProjectUtils.showSickbar(
+                ProjectUtils.showSnackBar(
                     this@MainActivity,
                     llSnackBar,
                     "Internet connection not found!"

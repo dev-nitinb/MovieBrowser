@@ -1,8 +1,8 @@
-package com.test.moviebrowser.model
+package com.test.moviebrowser.data.model
 
 import java.io.Serializable
 
-data class Results(
+data class Movie(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: ArrayList<Int>,

@@ -1,4 +1,4 @@
-package com.test.moviebrowser.adapter
+package com.test.moviebrowser.ui.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -11,10 +11,10 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.test.moviebrowser.R
-import com.test.moviebrowser.activity.MovieDetailActivity
-import com.test.moviebrowser.model.Results
+import com.test.moviebrowser.ui.activity.MovieDetailActivity
+import com.test.moviebrowser.data.model.Movie
 
-class MovieAdapter(val mContext: Context, val alMovieResults: ArrayList<Results>) :
+class MovieAdapter(val mContext: Context, val alMovieResults: ArrayList<Movie>) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -34,7 +34,7 @@ class MovieAdapter(val mContext: Context, val alMovieResults: ArrayList<Results>
         var ivPoster = itemView.findViewById<AppCompatImageView>(R.id.ivPoster)
         var tvMovieName = itemView.findViewById<AppCompatTextView>(R.id.tvMovieName)
         var cardView = itemView.findViewById<CardView>(R.id.cardView)
-        fun bindData(movieResult: Results) {
+        fun bindData(movieResult: Movie) {
             Glide
                 .with(mContext)
                 .load("https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movieResult.poster_path}")

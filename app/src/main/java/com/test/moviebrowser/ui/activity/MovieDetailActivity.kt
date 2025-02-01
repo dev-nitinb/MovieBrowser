@@ -1,4 +1,4 @@
-package com.test.moviebrowser.activity
+package com.test.moviebrowser.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.test.moviebrowser.R
-import com.test.moviebrowser.model.Results
+import com.test.moviebrowser.data.model.Movie
 import com.test.moviebrowser.utils.ProjectUtils
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -19,7 +19,7 @@ class MovieDetailActivity : AppCompatActivity() {
     lateinit var tvRating: AppCompatTextView
     lateinit var tvReleaseDate: AppCompatTextView
 
-    lateinit var movie: Results
+    lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
         bindView()
 
-        movie = (intent.getSerializableExtra("movie") as Results?)!!
+        movie = (intent.getSerializableExtra("movie") as Movie?)!!
 
         Glide.with(this)
             .applyDefaultRequestOptions(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))

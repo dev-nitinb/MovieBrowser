@@ -1,6 +1,7 @@
-package com.test.moviebrowser.utils
+package com.test.moviebrowser.data.network
 
-import com.test.moviebrowser.model.MovieResponse
+import com.test.moviebrowser.data.model.MovieResponse
+import com.test.moviebrowser.utils.ProjectUtils
 import retrofit2.http.GET
 import retrofit2.http.Query
 
