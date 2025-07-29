@@ -1,7 +1,6 @@
 package com.test.moviebrowser.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,8 +20,10 @@ class HomePageActivity : AppCompatActivity() {
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[HomePageViewModel::class.java]
         setContentView(binding.root)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         if (ConnectionDetector.isConnected(this)) {
-            showProgressBar()
             viewModel.fetchMovies()
         } else {
             ProjectUtils.showSnackBar(
@@ -34,23 +35,13 @@ class HomePageActivity : AppCompatActivity() {
         observeData()
     }
 
-    private fun observeData(){
-        viewModel.movieList.observe(this){ list->
-            hideProgressBar()
+    private fun observeData() {
+        viewModel.movieList.observe(this) { list ->
             binding.rvMovie.layoutManager = GridLayoutManager(applicationContext, 2)
             val movieAdapter = MovieAdapter(list)
             binding.rvMovie.adapter = movieAdapter
         }
     }
-
-    private fun showProgressBar() {
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    private fun hideProgressBar() {
-        binding.progressBar.visibility = View.GONE
-    }
-
     companion object {
         const val TAG = "HomePageActivity"
     }
