@@ -10,7 +10,7 @@ import com.test.moviebrowser.data.model.Movie
 import com.test.moviebrowser.databinding.ItemMovieBinding
 import com.test.moviebrowser.ui.activity.MovieDetailActivity
 
-class MovieAdapter(private val alMovieResults: ArrayList<Movie>) :
+class MovieAdapter(private val alMovieResults: List<Movie>) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
