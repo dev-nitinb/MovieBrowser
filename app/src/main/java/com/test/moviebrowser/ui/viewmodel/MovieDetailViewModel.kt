@@ -7,8 +7,11 @@ import androidx.lifecycle.ViewModel
 import com.test.moviebrowser.data.model.Movie
 import com.test.moviebrowser.utils.ProjectUtils
 import androidx.lifecycle.map
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MovieDetailViewModel : ViewModel() {
+@HiltViewModel
+class MovieDetailViewModel @Inject constructor(): ViewModel() {
 
     private val _movie = MutableLiveData<Movie>()
     val movie get() = _movie

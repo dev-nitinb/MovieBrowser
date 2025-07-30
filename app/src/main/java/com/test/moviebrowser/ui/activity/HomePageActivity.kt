@@ -2,23 +2,25 @@ package com.test.moviebrowser.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.test.moviebrowser.databinding.ActivityHomePageBinding
 import com.test.moviebrowser.ui.adapter.MovieAdapter
 import com.test.moviebrowser.ui.viewmodel.HomePageViewModel
 import com.test.moviebrowser.utils.ConnectionDetector
 import com.test.moviebrowser.utils.ProjectUtils
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.activity.viewModels
 
+@AndroidEntryPoint
 class HomePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomePageBinding
-    private lateinit var viewModel: HomePageViewModel
+
+    private val viewModel: HomePageViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomePageBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this)[HomePageViewModel::class.java]
         setContentView(binding.root)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

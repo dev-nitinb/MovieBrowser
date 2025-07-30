@@ -8,11 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.test.moviebrowser.data.model.Movie
 import com.test.moviebrowser.data.repository.MovieRepository
 import com.test.moviebrowser.ui.activity.HomePageActivity.Companion.TAG
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class HomePageViewModel : ViewModel() {
+@HiltViewModel
+class HomePageViewModel @Inject constructor(private val movieRepository: MovieRepository) : ViewModel() {
     private val _movieList = MutableLiveData<List<Movie>>()
     val movieList: LiveData<List<Movie>> = _movieList
 
@@ -25,7 +28,7 @@ class HomePageViewModel : ViewModel() {
                 _loading.value = true
                 var newMovieList: List<Movie>
                 withContext(Dispatchers.IO) {
-                    newMovieList = MovieRepository.fetchMovie()
+                    newMovieList = movieRepository.fetchMovie()
                 }
                 _movieList.value = newMovieList
             } catch (e: Exception) {
