@@ -10,14 +10,15 @@ import com.test.moviebrowser.data.repository.MovieRepository
 import com.test.moviebrowser.ui.activity.HomePageActivity.Companion.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HomePageViewModel @Inject constructor(private val movieRepository: MovieRepository) : ViewModel() {
-    private val _movieList = MutableLiveData<List<Movie>>()
-    val movieList: LiveData<List<Movie>> = _movieList
+class HomePageViewModel @Inject constructor(private val movieRepository: MovieRepository) :
+    ViewModel() {
+    private val _movieList = MutableStateFlow<List<Movie>>(emptyList())
+    val movieList: MutableStateFlow<List<Movie>> = _movieList
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
@@ -26,11 +27,11 @@ class HomePageViewModel @Inject constructor(private val movieRepository: MovieRe
         viewModelScope.launch(Dispatchers.Main) {
             try {
                 _loading.value = true
-                var newMovieList: List<Movie>
-                withContext(Dispatchers.IO) {
-                    newMovieList = movieRepository.fetchMovie()
-                }
-                _movieList.value = newMovieList
+                movieRepository.fetchMovie()
+                    .collect { movies ->
+                        _movieList.value = movies
+                    }
+
             } catch (e: Exception) {
                 Log.e(TAG, "Request failed: ${e.message}")
                 _movieList.value = emptyList()

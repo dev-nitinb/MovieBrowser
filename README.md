@@ -13,4 +13,4 @@ An Android application demonstrating the use of MVVM architecture with LiveData,
 - Glide integration with BindingAdapter for image loading
 - LiveData-driven UI visibility
 - Retrofit for API requests
-- Recyclerview for listing movies
+- Data Injection using Dagger Hilt

@@ -10,6 +10,10 @@ import com.test.moviebrowser.utils.ConnectionDetector
 import com.test.moviebrowser.utils.ProjectUtils
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomePageActivity : AppCompatActivity() {
@@ -38,10 +42,14 @@ class HomePageActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        viewModel.movieList.observe(this) { list ->
-            binding.rvMovie.layoutManager = GridLayoutManager(applicationContext, 2)
-            val movieAdapter = MovieAdapter(list)
-            binding.rvMovie.adapter = movieAdapter
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.movieList.collect { list ->
+                    binding.rvMovie.layoutManager = GridLayoutManager(applicationContext, 2)
+                    val movieAdapter = MovieAdapter(list)
+                    binding.rvMovie.adapter = movieAdapter
+                }
+            }
         }
     }
     companion object {
